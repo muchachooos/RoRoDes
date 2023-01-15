@@ -1,4 +1,4 @@
-module github.com/jmoiron/sqlx
+module GameAPI
 
 go 1.19
 
