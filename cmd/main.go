@@ -1,31 +1,21 @@
 package main
 
 import (
-	"GameAPI/model"
-	"encoding/json"
+	"GameAPI/configuration"
 	"github.com/gin-gonic/gin"
-	"os"
 	"strconv"
 )
 
+const configPath = "./configuration.json"
+
 func main() {
-	configInBytes, err := os.ReadFile("./configuration.json")
-	if err != nil {
-		panic(err)
-	}
-
-	var config model.Config
-
-	err = json.Unmarshal(configInBytes, &config)
-	if err != nil {
-		panic(err)
-	}
+	config := configuration.GetConfig(configPath)
 
 	engine := gin.Default()
 
 	engine.POST("/some_path", func(context *gin.Context) {})
 
-	err = engine.Run(":" + strconv.Itoa(config.Port))
+	err := engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {
 		panic(err)
 	}
