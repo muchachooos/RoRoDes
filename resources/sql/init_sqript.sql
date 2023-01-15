@@ -1,7 +1,7 @@
 CREATE TABLE `game`
 (
     `ID` CHAR(26) PRIMARY KEY,
-    `GAME`       VARCHAR(50)
+    `GAME`       VARCHAR(9999)
 );
 
 CREATE TABLE `card`
