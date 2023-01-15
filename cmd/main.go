@@ -2,7 +2,10 @@ package main
 
 import (
 	"GameAPI/configuration"
+	"GameAPI/handler"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"strconv"
 )
 
@@ -13,9 +16,18 @@ func main() {
 
 	engine := gin.Default()
 
-	engine.POST("/some_path", func(context *gin.Context) {})
+	engine.POST("/some_path", handler.GetGame)
 
-	err := engine.Run(":" + strconv.Itoa(config.Port))
+	dataBase, err := sqlx.Open("mysql", config.DataSourceName)
+	if err != nil {
+		panic(err)
+	}
+
+	if dataBase == nil {
+		panic("Data base nil")
+	}
+
+	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {
 		panic(err)
 	}
