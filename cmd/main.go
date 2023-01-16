@@ -14,8 +14,6 @@ const configPath = "./configuration.json"
 func main() {
 	config := configuration.GetConfig(configPath)
 
-	engine := gin.Default()
-
 	dataBase, err := sqlx.Open("mysql", config.DataSourceName)
 	if err != nil {
 		panic(err)
@@ -28,6 +26,8 @@ func main() {
 	server := handler.DataBase{
 		DB: dataBase,
 	}
+
+	engine := gin.Default()
 
 	//engine.GET("/get_game", server.GetGameHandler)
 	engine.POST("/create_game", server.CreateGame)
