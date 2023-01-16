@@ -16,8 +16,6 @@ func main() {
 
 	engine := gin.Default()
 
-	engine.POST("/some_path", handler.GetGame)
-
 	dataBase, err := sqlx.Open("mysql", config.DataSourceName)
 	if err != nil {
 		panic(err)
@@ -26,6 +24,13 @@ func main() {
 	if dataBase == nil {
 		panic("Data base nil")
 	}
+
+	server := handler.DataBase{
+		DB: dataBase,
+	}
+
+	//engine.GET("/get_game", server.GetGameHandler)
+	engine.POST("/create_game", server.CreateGame)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {
