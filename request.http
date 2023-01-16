@@ -1,0 +1,4 @@
+GET http://localhost:8080/get_game?id=324235
+
+###
+GET http://localhost:8080/get_unit?id=324235
