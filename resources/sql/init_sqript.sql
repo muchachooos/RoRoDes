@@ -6,6 +6,8 @@ CREATE TABLE card
     `speed`  INT
 );
 
+INSERT INTO card(`id`, `name`, `damage`, `speed`) VALUES (?,?,?,?);
+
 CREATE TABLE unit
 (
     `id`      CHAR(26) PRIMARY KEY,
@@ -16,47 +18,47 @@ CREATE TABLE unit
 
 CREATE TABLE game
 (
-    `id`       CHAR(36) PRIMARY KEY,
-    `unit_on_field_1`  CHAR(26),
-    `field_2`  CHAR(26),
-    `field_3`  CHAR(26),
-    `field_4`  CHAR(26),
-    `field_5`  CHAR(26),
-    `field_6`  CHAR(26),
-    `field_7`  CHAR(26),
-    `field_8`  CHAR(26),
-    `field_9`  CHAR(26),
-    `field_10` CHAR(26),
-    `field_11` CHAR(26),
-    `field_12` CHAR(26),
-    `field_13` CHAR(26),
-    `field_14` CHAR(26),
-    `field_15` CHAR(26),
-    `field_16` CHAR(26),
-    `field_17` CHAR(26),
-    `field_18` CHAR(26),
-    `field_19` CHAR(26),
-    `field_20` CHAR(26),
-    `field_21` CHAR(26),
-    `field_22` CHAR(26),
-    `field_23` CHAR(26),
-    `field_24` CHAR(26),
-    `field_25` CHAR(26),
-    `field_26` CHAR(26),
-    `field_27` CHAR(26),
-    `field_28` CHAR(26),
-    `field_29` CHAR(26),
-    `field_30` CHAR(26),
-    `field_31` CHAR(26),
-    `field_32` CHAR(26),
-    `field_33` CHAR(26),
-    `field_34` CHAR(26),
-    `field_35` CHAR(26),
-    `field_36` CHAR(26),
-    `field_37` CHAR(26),
-    `field_38` CHAR(26),
-    `field_39` CHAR(26),
-    `field_40` CHAR(26),
+    `id`              CHAR(36) PRIMARY KEY,
+    `field_1` CHAR(26),
+    `field_2`         CHAR(26),
+    `field_3`         CHAR(26),
+    `field_4`         CHAR(26),
+    `field_5`         CHAR(26),
+    `field_6`         CHAR(26),
+    `field_7`         CHAR(26),
+    `field_8`         CHAR(26),
+    `field_9`         CHAR(26),
+    `field_10`        CHAR(26),
+    `field_11`        CHAR(26),
+    `field_12`        CHAR(26),
+    `field_13`        CHAR(26),
+    `field_14`        CHAR(26),
+    `field_15`        CHAR(26),
+    `field_16`        CHAR(26),
+    `field_17`        CHAR(26),
+    `field_18`        CHAR(26),
+    `field_19`        CHAR(26),
+    `field_20`        CHAR(26),
+    `field_21`        CHAR(26),
+    `field_22`        CHAR(26),
+    `field_23`        CHAR(26),
+    `field_24`        CHAR(26),
+    `field_25`        CHAR(26),
+    `field_26`        CHAR(26),
+    `field_27`        CHAR(26),
+    `field_28`        CHAR(26),
+    `field_29`        CHAR(26),
+    `field_30`        CHAR(26),
+    `field_31`        CHAR(26),
+    `field_32`        CHAR(26),
+    `field_33`        CHAR(26),
+    `field_34`        CHAR(26),
+    `field_35`        CHAR(26),
+    `field_36`        CHAR(26),
+    `field_37`        CHAR(26),
+    `field_38`        CHAR(26),
+    `field_39`        CHAR(26),
+    `field_40`        CHAR(26),
 
     CONSTRAINT `FK_unit_id_F1` FOREIGN KEY (`field_1`)
         REFERENCES `unit` (`id`),
@@ -140,5 +142,11 @@ CREATE TABLE game
         REFERENCES `unit` (`id`)
 );
 
+INSERT INTO game (id, field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10,
+                  field_11, field_12, field_13, field_14, field_15, field_16, field_17, field_18, field_19, field_20,
+                  field_21, field_22, field_23, field_24, field_25, field_26, field_27, field_28, field_29, field_30,
+                  field_31, field_32, field_33, field_34, field_35, field_36, field_37, field_38, field_39, field_40)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+        ?, ?, ?);
 
 DROP TABLE game, card, unit
