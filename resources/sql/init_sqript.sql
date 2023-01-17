@@ -1,7 +1,7 @@
 DROP TABLE game, card, unit;
 
 INSERT INTO unit (id, card_id)
-VALUES ('12345678123456781154567810', null);
+VALUES ('12345678123411781154567810', null);
 
 SELECT *
 FROM game;
@@ -19,6 +19,7 @@ CREATE TABLE unit
 (
     `id`      CHAR(26) PRIMARY KEY,
     `card_id` CHAR(26),
+    `health`  INT NOT NULL,
     CONSTRAINT `FK_card_id` FOREIGN KEY (`card_id`)
         REFERENCES `card` (`id`)
 );
