@@ -1,7 +1,4 @@
 ###
-GET http://localhost:8080/get_unit?id=324235
-
-###
 POST http://localhost:8080/init_game
 Content-Type: application/json
 
@@ -336,4 +333,17 @@ Content-Type: application/json
 ]
 
 ###
-GET http://localhost:8080/get_game?id=
+GET http://localhost:8080/get_game?id=bba3d595-047f-4e62-a845-017716f9ae12
+
+###
+GET http://localhost:8080/get_unit?id=
+
+###
+POST http://localhost:8080/move_unit
+Content-Type: application/json
+
+{
+  "game_id": "",
+  "unit_id": "",
+  "move_to_field": ""
+}
