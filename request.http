@@ -1,11 +1,8 @@
 ###
-GET http://localhost:8080/get_game?id=324235
-
-###
 GET http://localhost:8080/get_unit?id=324235
 
 ###
-POST http://localhost:8080/create_game
+POST http://localhost:8080/init_game
 Content-Type: application/json
 
 [
@@ -170,3 +167,173 @@ Content-Type: application/json
     "unit": null
   }
 ]
+
+###
+POST http://localhost:8080/create_game
+Content-Type: application/json
+
+[
+  {
+    "number": 1,
+    "unit": "12345678123456781234567811"
+  },
+  {
+    "number": 2,
+    "unit": null
+  },
+  {
+    "number": 3,
+    "unit": null
+  },
+  {
+    "number": 4,
+    "unit": null
+  },
+  {
+    "number": 5,
+    "unit": null
+  },
+  {
+    "number": 6,
+    "unit": null
+  },
+  {
+    "number": 7,
+    "unit": null
+  },
+  {
+    "number": 8,
+    "unit": null
+  },
+  {
+    "number": 9,
+    "unit": null
+  },
+  {
+    "number": 10,
+    "unit": null
+  },
+  {
+    "number": 11,
+    "unit": null
+  },
+  {
+    "number": 12,
+    "unit": null
+  },
+  {
+    "number": 13,
+    "unit": null
+  },
+  {
+    "number": 14,
+    "unit": null
+  },
+  {
+    "number": 15,
+    "unit": null
+  },
+  {
+    "number": 16,
+    "unit": null
+  },
+  {
+    "number": 17,
+    "unit": null
+  },
+  {
+    "number": 18,
+    "unit": null
+  },
+  {
+    "number": 19,
+    "unit": null
+  },
+  {
+    "number": 20,
+    "unit": null
+  },
+  {
+    "number": 21,
+    "unit": null
+  },
+  {
+    "number": 22,
+    "unit": null
+  },
+  {
+    "number": 23,
+    "unit": null
+  },
+  {
+    "number": 24,
+    "unit": null
+  },
+  {
+    "number": 25,
+    "unit": null
+  },
+  {
+    "number": 26,
+    "unit": null
+  },
+  {
+    "number": 27,
+    "unit": null
+  },
+  {
+    "number": 28,
+    "unit": null
+  },
+  {
+    "number": 29,
+    "unit": null
+  },
+  {
+    "number": 30,
+    "unit": null
+  },
+  {
+    "number": 31,
+    "unit": null
+  },
+  {
+    "number": 32,
+    "unit": null
+  },
+  {
+    "number": 33,
+    "unit": null
+  },
+  {
+    "number": 34,
+    "unit": null
+  },
+  {
+    "number": 35,
+    "unit": null
+  },
+  {
+    "number": 36,
+    "unit": null
+  },
+  {
+    "number": 37,
+    "unit": null
+  },
+  {
+    "number": 38,
+    "unit": null
+  },
+  {
+    "number": 39,
+    "unit": null
+  },
+  {
+    "number": 40,
+    "unit": null
+  }
+]
+
+###
+GET http://localhost:8080/get_game?id=
