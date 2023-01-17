@@ -33,7 +33,7 @@ func (s *DataBase) InitGameHandler(context *gin.Context) {
 
 	gameId := uuid.NewString()
 
-	_, err = s.DB.Exec("INSERT INTO game VALUES (?)", gameId)
+	_, err = s.DB.Exec("INSERT INTO game (`id`) VALUES (?)", gameId)
 	if err != nil {
 		panic(err)
 	}
@@ -84,16 +84,26 @@ func (s *DataBase) CreateGameHandler(context *gin.Context) {
 }
 
 func (s *DataBase) GetGameHandler(context *gin.Context) {
-	gameID, ok := context.GetQuery("game_ID")
+	gameID, ok := context.GetQuery("id")
 	if gameID == "" || !ok {
 		context.Writer.WriteString("Game ID is missing")
 		return
 	}
 
-	_, err := s.DB.Exec("INSERT INTO game (`ID`,`GAME`)VALUES (?)", gameID)
+	var game []model.Game
+
+	err := s.DB.Select(&game, "SELECT * FROM game WHERE `id` = ?", gameID)
 	if err != nil {
 		panic(err)
 	}
+
+	if len(game) == 0 {
+		context.Status(404)
+		context.Writer.WriteString("No students with this ID")
+		return
+	}
+
+	context.JSON(http.StatusOK, game)
 }
 
 /*
@@ -115,19 +125,6 @@ func (s *DataBase) GetGameHandler(context *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-
-
-
-
-
-
-
-(id, field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10,
-                  field_11, field_12, field_13, field_14, field_15, field_16, field_17, field_18, field_19, field_20,
-                  field_21, field_22, field_23, field_24, field_25, field_26, field_27, field_28, field_29, field_30,
-                  field_31, field_32, field_33, field_34, field_35, field_36, field_37, field_38, field_39, field_40)
-
-
 
 
 
