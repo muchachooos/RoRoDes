@@ -30,7 +30,6 @@ func main() {
 	engine := gin.Default()
 
 	engine.POST("/init_game", server.InitGameHandler)
-	engine.POST("/create_game", server.CreateGameHandler)
 	engine.GET("/get_game", server.GetGameHandler)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
