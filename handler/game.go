@@ -48,67 +48,25 @@ func (s *DataBase) InitGameHandler(context *gin.Context) {
 	context.JSON(http.StatusOK, gameId)
 }
 
-func (s *DataBase) CreateGameHandler(context *gin.Context) {
-	bodyOnBytes, err := io.ReadAll(context.Request.Body)
-	if err != nil {
-		context.JSON(http.StatusInternalServerError, model.Err{Error: "Read body error: " + err.Error()})
+func (s *DataBase) GetGameHandler(context *gin.Context) {
+	gameID, ok := context.GetQuery("id")
+	if gameID == "" || !ok {
+		context.Writer.WriteString("Game ID is missing")
 		return
 	}
 
-	err = context.Request.Body.Close()
-	if err != nil {
-		context.JSON(http.StatusInternalServerError, model.Err{Error: "Close body error: " + err.Error()})
-		return
-	}
+	var game []model.Field
 
-	var fields []model.Field
-
-	err = json.Unmarshal(bodyOnBytes, &fields)
-	if err != nil {
-		context.JSON(http.StatusBadRequest, model.Err{Error: "Unmarshal request body error: " + err.Error()})
-	}
-
-	gameId := uuid.NewString()
-
-	query := `INSERT game VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?);`
-
-	var units []any
-	for i := range fields {
-		units = append(units, fields[i].UnitID)
-	}
-
-	idInSlice := []any{gameId}
-
-	var args = append(idInSlice, units...)
-
-	_, err = s.DB.Exec(query, args...)
+	err := s.DB.Select(&game, "SELECT `number`,`unit_id` FROM fields WHERE `game_id` = ?", gameID)
 	if err != nil {
 		panic(err)
 	}
 
-	context.JSON(http.StatusOK, gameId)
-}
+	if len(game) == 0 {
+		context.Status(404)
+		context.Writer.WriteString("No game with this ID")
+		return
+	}
 
-func (s *DataBase) GetGameHandler(context *gin.Context) {
-	//gameID, ok := context.GetQuery("id")
-	//if gameID == "" || !ok {
-	//	context.Writer.WriteString("Game ID is missing")
-	//	return
-	//}
-	//
-	//var game []model.Game
-	//
-	//err := s.DB.Select(&game, "SELECT * FROM game WHERE `id` = ?", gameID)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//if len(game) == 0 {
-	//	context.Status(404)
-	//	context.Writer.WriteString("No game with this ID")
-	//	return
-	//}
-	//
-	//context.JSON(http.StatusOK, game)
+	context.JSON(http.StatusOK, game)
 }
