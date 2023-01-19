@@ -1,14 +1,14 @@
 DROP TABLE game, card, unit, fields;
 
-INSERT INTO unit (id, card_id)
+INSERT INTO unit (`id`, `card_id`)
 VALUES ('12345678123411781154567810', null);
 
-SELECT *
-FROM game;
+INSERT INTO card (`id`, `name`, `damage`, `speed`)
+VALUES ('80cbfcb0-1111-4e84-a184-a222d665f05b', 'ebala', 33, 250);
 
 CREATE TABLE game
 (
-    `id`   CHAR(36) PRIMARY KEY
+    `id` CHAR(36) PRIMARY KEY
 );
 
 CREATE TABLE card
