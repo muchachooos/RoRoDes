@@ -34,6 +34,7 @@ func main() {
 
 	engine.POST("/init_game", server.InitGameHandler)
 	engine.GET("/get_game", server.GetGameHandler)
+	engine.POST("/create_unit", server.CreateUnitHandler)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {
