@@ -6,33 +6,31 @@ import (
 	"net/http"
 )
 
-func (d *Server) InitGameHandler(context *gin.Context) {
-	gameID, err := d.Storage.InitGameInDB()
+func (s *Server) InitGameHandler(context *gin.Context) {
+	gameID, err := s.Storage.InitGameInDB()
 	if err != nil {
-		panic(err)
+		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
+		return
 	}
 
 	context.JSON(http.StatusOK, gameID)
 }
 
-func (d *Server) GetGameHandler(context *gin.Context) {
+func (s *Server) GetGameHandler(context *gin.Context) {
 	gameID, ok := context.GetQuery("id")
 	if gameID == "" || !ok {
-		context.Writer.WriteString("Game ID is missing")
+		context.JSON(http.StatusBadRequest, model.Err{Error: "Game ID is missing"})
 		return
 	}
 
-	var game []model.Field
-
-	err := d.Storage.DB.Select(&game, "SELECT `number`,`unit_id` FROM fields WHERE `game_id` = ?", gameID)
+	game, err := s.Storage.GetGameFromDB(gameID)
 	if err != nil {
-		panic(err)
+		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
+		return
 	}
 
 	if len(game) == 0 {
-		context.Status(404)
-		context.Writer.WriteString("No game with this ID")
-		return
+		context.JSON(http.StatusNotFound, model.Err{Error: "No game with this ID: " + err.Error()})
 	}
 
 	context.JSON(http.StatusOK, game)
