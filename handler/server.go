@@ -1,7 +1,7 @@
 package handler
 
-import "github.com/jmoiron/sqlx"
+import "GameAPI/storage"
 
-type DataBase struct {
-	DB *sqlx.DB
+type Server struct {
+	Storage *storage.Storage
 }
