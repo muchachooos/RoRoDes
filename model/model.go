@@ -10,10 +10,22 @@ type Config struct {
 	Key            string `json:"auth_key"`
 }
 
+type Card struct {
+	ID      string  `db:"id"`
+	Name    *string `db:"name"`
+	Damage  *int    `db:"damage"`
+	Speed   *int    `db:"speed"`
+	Health  int     `db:"health"`
+	Picture byte    `db:"picture"`
+}
+
 type Unit struct {
-	ID     string  `db:"id"`
-	CardID *string `db:"card_id"`
-	Health int     `db:"health"`
+	ID     string  `json:"id" db:"id"`
+	CardID string  `json:"card_id" db:"card_id"`
+	Name   *string `json:"name" db:"name"`
+	Damage *int    `json:"damage" db:"damage"`
+	Speed  *int    `json:"speed" db:"speed"`
+	Health int     `json:"health" db:"health"`
 }
 
 type Field struct {
