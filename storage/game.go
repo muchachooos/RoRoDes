@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"GameAPI/model"
 	"github.com/google/uuid"
 )
 
@@ -11,15 +12,26 @@ func (s *Storage) InitGameInDB() (string, error) {
 
 	_, err := s.DB.Exec("INSERT INTO game (`id`) VALUES (?)", gameId)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
 	for i := 1; i <= countOfFields; i++ {
 		_, err = s.DB.Exec("INSERT INTO fields (`number`, `game_id`) VALUES (?,?)", i, gameId)
 		if err != nil {
-			panic(err)
+			return "", err
 		}
 	}
 
-	return gameId, err
+	return gameId, nil
+}
+
+func (s *Storage) GetGameFromDB(gameID string) ([]model.Field, error) {
+	var game []model.Field
+
+	err := s.DB.Select(&game, "SELECT `number`,`unit_id` FROM fields WHERE `game_id` = ?", gameID)
+	if err != nil {
+		return nil, err
+	}
+
+	return game, nil
 }
