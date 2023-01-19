@@ -3,8 +3,8 @@ DROP TABLE game, card, unit, fields;
 INSERT INTO unit (`id`, `card_id`)
 VALUES ('12345678123411781154567810', null);
 
-INSERT INTO card (`id`, `name`, `damage`, `speed`)
-VALUES ('80cbfcb0-1111-4e84-a184-a222d665f05b', 'ebala', 33, 250);
+INSERT INTO card (`id`, `name`, `damage`, `speed`,`health`,`picture`)
+VALUES ('80cbfcb0-1111-4e44-a484-a222d665f05b', 'eblanNumberOne', 33, 250, 980, null);
 
 CREATE TABLE game
 (
@@ -13,22 +13,25 @@ CREATE TABLE game
 
 CREATE TABLE card
 (
-    `id`     CHAR(36) PRIMARY KEY,
-    `name`   VARCHAR(26),
-    `damage` INT,
-    `speed`  INT
+    `id`      CHAR(36) PRIMARY KEY,
+    `name`    VARCHAR(26),
+    `damage`  INT,
+    `speed`   INT,
+    `health`  INT NOT NULL,
+    `picture` MEDIUMBLOB
 );
 
 CREATE TABLE unit
 (
     `id`      CHAR(36) PRIMARY KEY,
     `card_id` CHAR(36),
-
-
+    `name`    VARCHAR(26),
+    `damage`  INT,
+    `speed`   INT,
     `health`  INT NOT NULL,
     CONSTRAINT `FK_card_id` FOREIGN KEY (`card_id`)
         REFERENCES `card` (`id`)
-);
+);### game
 
 CREATE TABLE fields
 (
