@@ -3,6 +3,7 @@ package main
 import (
 	"GameAPI/configuration"
 	"GameAPI/handler"
+	"GameAPI/storage"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -23,8 +24,10 @@ func main() {
 		panic("Data base nil")
 	}
 
-	server := handler.DataBase{
-		DB: dataBase,
+	server := handler.Server{
+		Storage: &storage.Storage{
+			DB: dataBase,
+		},
 	}
 
 	engine := gin.Default()
