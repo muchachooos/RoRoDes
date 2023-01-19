@@ -1,12 +1,11 @@
 ###
 POST http://localhost:8080/init_game
-Content-Type: application/json
 
 ###
-GET http://localhost:8080/get_game?id=80cbfcb0-f7fb-4e84-a184-a201d665f05b
+GET http://localhost:8080/get_game?id=80cbfcb0-1111-4e84-a184-a222d665f05b
 
 ###
-POST http://localhost:8080/create_unit?card_id=
+POST http://localhost:8080/create_unit?card_id=80cbfcb0-1111-4e84-a184-a222d665f05b
 
 ###
 GET http://localhost:8080/get_unit?id=
