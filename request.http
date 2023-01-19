@@ -2,10 +2,10 @@
 POST http://localhost:8080/init_game
 
 ###
-GET http://localhost:8080/get_game?id=80cbfcb0-1111-4e84-a184-a222d665f05b
+GET http://localhost:8080/get_game?id=9b20410d-3fd8-4c54-b1ee-a7408903939a
 
 ###
-POST http://localhost:8080/create_unit?card_id=80cbfcb0-1111-4e84-a184-a222d665f05b
+POST http://localhost:8080/create_unit?card_id=80cbfcb0-1111-4e44-a484-a222d665f05b
 
 ###
 GET http://localhost:8080/get_unit?id=
