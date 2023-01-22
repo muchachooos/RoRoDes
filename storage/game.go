@@ -10,7 +10,7 @@ const countOfFields = 40
 func (s *Storage) InitGameInDB() (string, error) {
 	gameId := uuid.NewString()
 
-	_, err := s.DB.Exec("INSERT INTO game (`id`) VALUES (?)", gameId)
+	_, err := s.DB.Exec("INSERT INTO game (`game_id`) VALUES (?)", gameId)
 	if err != nil {
 		return "", err
 	}
