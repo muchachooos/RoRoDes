@@ -28,3 +28,14 @@ func (s *Storage) CreateUnitInDB(cardID, gameID string, fieldNum int) ([]model.U
 	}
 	return unit, nil
 }
+
+func (s *Storage) GetUnitFromDB(unitID string) ([]model.Unit, error) {
+	var unit []model.Unit
+
+	err := s.DB.Select(&unit, "SELECT * FROM unit WHERE `unit_id` = ?", unitID)
+	if err != nil {
+		return nil, err
+	}
+
+	return unit, err
+}
