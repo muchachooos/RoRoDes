@@ -4,10 +4,12 @@ import (
 	"GameAPI/configuration"
 	"GameAPI/handler"
 	"GameAPI/storage"
+	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"strconv"
 )
 
 const configPath = "./configuration.json"
@@ -35,6 +37,14 @@ func main() {
 	engine.POST("/init_game", server.InitGameHandler)
 	engine.GET("/get_game", server.GetGameHandler)
 	engine.POST("/create_unit", server.CreateUnitHandler)
+
+	// Файловый сервер который возвращает html, css, js и другие файлы
+	engine.StaticFS("/client", http.Dir("client"))
+
+	// Перенаправляем все запросы без относительного пути, пример: "www.here.com" -> "www.here.com/client"
+	engine.GET("", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "client")
+	})
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {

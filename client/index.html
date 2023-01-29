@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grid</title>
+    <style>
+
+        body {
+            /*настраиваем шрифт*/
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /*общие настройки сетки*/
+        .grid {
+            grid-template-columns: repeat(8, 200px);
+            grid-template-rows: repeat(5, 200px);
+            /*рисуем зелёные рамки*/
+            border: 5px solid #d1e231;
+            /*подключаем сетку*/
+            display: grid;
+        }
+
+        /*внешний вид ячеек*/
+        .grid > * {
+            /*фоновый цвет*/
+            background-color: #ffbf94;
+            /*скругление углов*/
+            border-radius: 5px;
+            /*отступ от содержимого до края ячейки*/
+            padding: 7px;
+            /*расстояние от одной границы ячейки до другой*/
+            margin: 1px;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- создаём контейнер, который будет отвечать за нашу сетку -->
+<div class="grid">
+    <!-- и создаём 10 вложенных элементов -->
+    <div id="1"><img id="shkilet" src="img/shkilet.jpeg" height="183"></div>
+    <div id="2"><img id="soldier" src="img/soldier.jpg" height="183"></div>
+    <div id="3"></div>
+    <div id="4"></div>
+    <div id="5"></div>
+    <div id="6"></div>
+    <div id="7"></div>
+    <div id="8"></div>
+    <div id="9"></div>
+    <div id="10"></div>
+    <div id="11"></div>
+    <div id="12"></div>
+    <div id="13"></div>
+    <div id="14"></div>
+    <div id="15"></div>
+    <div id="16"></div>
+    <div id="17"></div>
+    <div id="18"></div>
+    <div id="19"></div>
+    <div id="20"></div>
+    <div id="21"></div>
+    <div id="22"></div>
+    <div id="23"></div>
+    <div id="24"></div>
+    <div id="25"></div>
+    <div id="26"></div>
+    <div id="27"></div>
+    <div id="28"></div>
+    <div id="29"></div>
+    <div id="30"></div>
+    <div id="31"></div>
+    <div id="32"></div>
+    <div id="33"></div>
+    <div id="34"></div>
+    <div id="35"></div>
+    <div id="36"></div>
+    <div id="37"></div>
+    <div id="38"></div>
+    <div id="39"></div>
+    <div id="40"></div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>
