@@ -40,3 +40,23 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 
 	context.JSON(http.StatusOK, unit)
 }
+
+func (s *Server) GetUnitHandler(context *gin.Context) {
+	unitId, ok := context.GetQuery("id")
+	if unitId == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "Unit ID is missing"})
+		return
+	}
+
+	unit, err := s.Storage.GetUnitFromDB(unitId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
+		return
+	}
+
+	if len(unit) == 0 {
+		context.JSON(http.StatusNotFound, model.Err{Error: "No unit with this ID: " + err.Error()})
+	}
+
+	context.JSON(http.StatusOK, unit)
+}
