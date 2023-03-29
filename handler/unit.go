@@ -2,6 +2,7 @@ package handler
 
 import (
 	"GameAPI/model"
+	"GameAPI/storage"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -20,15 +21,23 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 		return
 	}
 
-	fieldNumInString, ok := context.GetQuery("field_num")
-	if fieldNumInString == "" || !ok {
-		context.JSON(http.StatusBadRequest, model.Err{Error: "Field number is missing"})
+	xInString, ok := context.GetQuery("x")
+	if xInString == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "X is missing"})
 		return
 	}
 
-	fieldNum, err := strconv.Atoi(fieldNumInString)
+	yInString, ok := context.GetQuery("y")
+	if yInString == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "Y is missing"})
+		return
+	}
 
-	unit, err := s.Storage.CreateUnitInDB(cardID, gameID, fieldNum)
+	x, err := strconv.Atoi(xInString)
+
+	y, err := strconv.Atoi(yInString)
+
+	unit, err := s.Storage.CreateUnitInDB(cardID, gameID, x, y)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
@@ -42,21 +51,47 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 }
 
 func (s *Server) GetUnitHandler(context *gin.Context) {
-	unitId, ok := context.GetQuery("id")
+	unitId, ok := context.GetQuery("unit_id")
 	if unitId == "" || !ok {
 		context.JSON(http.StatusBadRequest, model.Err{Error: "Unit ID is missing"})
 		return
 	}
 
-	unit, err := s.Storage.GetUnitFromDB(unitId)
+	unitField, err := s.Storage.GetUnitFromDB(unitId)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
 	}
 
-	if len(unit) == 0 {
+	if len(unitField) == 0 {
 		context.JSON(http.StatusNotFound, model.Err{Error: "No unit with this ID: " + err.Error()})
 	}
 
-	context.JSON(http.StatusOK, unit)
+	context.JSON(http.StatusOK, unitField)
+}
+
+func (s *Server) MoveUnitHandler(context *gin.Context) {
+	uintId, ok := context.GetQuery("unit_id")
+	if uintId == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "Unit ID is missing"})
+		return
+	}
+
+	dir, ok := context.GetQuery("direction")
+	if dir == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "Direction is missing"})
+		return
+	}
+
+	ok, err := s.Storage.MoveUnitInDB(uintId, dir)
+	if err != nil {
+		if err == storage.ErrMoveUnit {
+			context.JSON(http.StatusConflict, model.Err{Error: err.Error()})
+			return
+		}
+		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, ok)
 }

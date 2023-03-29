@@ -2,6 +2,7 @@ package storage
 
 import (
 	"GameAPI/model"
+	"GameAPI/utilities"
 	"github.com/google/uuid"
 )
 
@@ -15,8 +16,10 @@ func (s *Storage) InitGameInDB() (string, error) {
 		return "", err
 	}
 
-	for i := 1; i <= countOfFields; i++ {
-		_, err = s.DB.Exec("INSERT INTO fields (`number`, `game_id`) VALUES (?,?)", i, gameId)
+	fieldsArray := utilities.CreateFields(gameId)
+
+	for i := 0; i < countOfFields; i++ {
+		_, err = s.DB.Exec("INSERT INTO field (`y`,`x`,`game_id`) VALUES (?,?,?)", fieldsArray[i].Y, fieldsArray[i].X, fieldsArray[i].GameID)
 		if err != nil {
 			return "", err
 		}
@@ -28,10 +31,21 @@ func (s *Storage) InitGameInDB() (string, error) {
 func (s *Storage) GetGameFromDB(gameID string) ([]model.Field, error) {
 	var game []model.Field
 
-	err := s.DB.Select(&game, "SELECT `number`,`unit_id` FROM fields WHERE `game_id` = ?", gameID)
+	err := s.DB.Select(&game, "SELECT `x`,`y`,`unit_id` FROM field WHERE `game_id` = ?", gameID)
 	if err != nil {
 		return nil, err
 	}
 
 	return game, nil
 }
+
+/*
+const countOfFields = 40
+
+		for i := 1; i <= countOfFields; i++ {
+		_, err = s.DB.Exec("INSERT INTO field (`x`, `y`, `game_id`) VALUES (?,?,?)", i, gameId)
+		if err != nil {
+			return "", err
+		}
+	}
+*/

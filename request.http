@@ -2,20 +2,14 @@
 POST http://localhost:8080/init_game
 
 ###
-GET http://localhost:8080/get_game?id=6e7a3251-2d46-4e15-8d54-0a3739b1be0e
+GET http://localhost:8080/get_game?game_id=86977052-a92f-4e24-bbdc-d5af2a819dcd
 
 ###
-POST http://localhost:8080/create_unit?card_id=80cbfcb0-1111-4e44-a484-a222d665f05b&game_id=6e7a3251-2d46-4e15-8d54-0a3739b1be0e&field_num=1
+POST http://localhost:8080/create_unit?card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e&game_id=f7829347-370a-46db-b996-d0ed3cdc17d1&y=3&x=3
 
 ###
-GET http://localhost:8080/get_unit?id=4bbdb621-1b6d-41ed-a9e4-53589da9cca4
+GET http://localhost:8080/get_unit?unit_id=a39748bf-3359-49ff-938b-748ad55e7f9b
 
 ###
+POST http://localhost:8080/move_unit?unit_id=3d3960b4-e36b-44f2-9b01-75a96150cb5a&direction=DOWN
 
-
-###
-POST http://localhost:8080/move_unit?unit_id=move_to_field
-
-###
-POST http://localhost:8080/create_card?name=&damage=&speed=&health=
-Content-Type: application/json

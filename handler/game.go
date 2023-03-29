@@ -17,7 +17,7 @@ func (s *Server) InitGameHandler(context *gin.Context) {
 }
 
 func (s *Server) GetGameHandler(context *gin.Context) {
-	gameID, ok := context.GetQuery("id")
+	gameID, ok := context.GetQuery("game_id")
 	if gameID == "" || !ok {
 		context.JSON(http.StatusBadRequest, model.Err{Error: "Game ID is missing"})
 		return
