@@ -42,14 +42,3 @@ type Body struct {
 	Speed  *int    `json:"speed" db:"speed"`
 	Health *int    `json:"health" db:"health"`
 }
-
-//type Game struct {
-//	Fields []GameField `json:"game"`
-//}
-
-//type T struct {
-//	Game []struct {
-//		Field string  `json:"field"`
-//		Unit  *string `json:"unit"`
-//	} `json:"game"`
-//}
