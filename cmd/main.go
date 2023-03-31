@@ -3,7 +3,9 @@ package main
 import (
 	"GameAPI/configuration"
 	"GameAPI/handler"
+	"GameAPI/model"
 	"GameAPI/storage"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -16,7 +18,7 @@ const configPath = "./configuration.json"
 func main() {
 	config := configuration.GetConfig(configPath)
 
-	dataBase, err := sqlx.Open("mysql", config.DataSourceName)
+	dataBase, err := sqlx.Open("mysql", getDSN(config.DBConf))
 	if err != nil {
 		panic(err)
 	}
@@ -51,4 +53,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func getDSN(cfg model.DBConf) string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
+		cfg.User, cfg.Password, cfg.Host, cfg.DBPort, cfg.DBName)
 }

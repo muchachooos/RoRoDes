@@ -5,9 +5,16 @@ type Err struct {
 }
 
 type Config struct {
-	DataSourceName string `json:"dataSourceName"`
-	Port           int    `json:"port"`
-	Key            string `json:"auth_key"`
+	Port   int    `json:"port"`
+	DBConf DBConf `json:"DataBase"`
+}
+
+type DBConf struct {
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	DBName   string `json:"dataBaseName"`
+	DBPort   int    `json:"db_port"`
 }
 
 type Card struct {
