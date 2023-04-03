@@ -46,7 +46,7 @@ func main() {
 
 	// Перенаправляем все запросы без относительного пути, пример: "www.here.com" -> "www.here.com/client"
 	engine.GET("", func(c *gin.Context) {
-		c.Redirect(http.StatusMovedPermanently, "client")
+		c.Redirect(http.StatusMovedPermanently, "game")
 	})
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
