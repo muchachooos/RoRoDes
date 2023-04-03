@@ -42,9 +42,9 @@ func main() {
 	engine.POST("/move_unit", server.MoveUnitHandler)
 
 	// Файловый сервер который возвращает html, css, js и другие файлы
-	engine.StaticFS("/game", http.Dir("client"))
+	engine.StaticFS("/game", http.Dir("../client"))
 
-	// Перенаправляем все запросы без относительного пути, пример: "www.here.com" -> "www.here.com/client"
+	// Перенаправляем все запросы без относительного пути, пример: "www.here.com" -> "www.here.com/game"
 	engine.GET("", func(c *gin.Context) {
 		c.Redirect(http.StatusMovedPermanently, "game")
 	})
