@@ -5,6 +5,9 @@ POST http://localhost:8080/init_game
 GET http://localhost:8080/get_game?game_id=86977052-a92f-4e24-bbdc-d5af2a819dcd
 
 ###
+POST http://localhost:8080/create_сard
+
+###
 POST http://localhost:8080/create_unit?card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e&game_id=f7829347-370a-46db-b996-d0ed3cdc17d1&y=3&x=3
 
 ###

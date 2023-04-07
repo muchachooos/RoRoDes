@@ -1,5 +1,3 @@
-DROP TABLE game, card, unit, field;
-
 CREATE TABLE game
 (
     `game_id` CHAR(36) PRIMARY KEY
@@ -40,6 +38,3 @@ CREATE TABLE field
     CONSTRAINT `FK_unit_id` FOREIGN KEY (`unit_id`)
         REFERENCES `unit` (`unit_id`)
 );
-
-INSERT INTO card (`card_id`, `name`, `damage`, `speed`, `health`, `picture`)
-VALUES ('6e7a3251-3333-4e15-7777-0a3739b1be0e', 'eblanNumberOne', 33, 250, 980, null);
