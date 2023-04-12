@@ -28,8 +28,8 @@ func (s *Storage) InitGameInDB() (string, error) {
 	return gameId, nil
 }
 
-func (s *Storage) GetGameFromDB(gameID string) ([]model.Field, error) {
-	var game []model.Field
+func (s *Storage) GetGameFromDB(gameID string) ([]model.FieldResponse, error) {
+	var game []model.FieldResponse
 
 	err := s.DB.Select(&game, "SELECT `x`,`y`,`unit_id` FROM field WHERE `game_id` = ?", gameID)
 	if err != nil {
@@ -38,14 +38,3 @@ func (s *Storage) GetGameFromDB(gameID string) ([]model.Field, error) {
 
 	return game, nil
 }
-
-/*
-const countOfFields = 40
-
-		for i := 1; i <= countOfFields; i++ {
-		_, err = s.DB.Exec("INSERT INTO field (`x`, `y`, `game_id`) VALUES (?,?,?)", i, gameId)
-		if err != nil {
-			return "", err
-		}
-	}
-*/

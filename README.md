@@ -4,34 +4,94 @@
 *Метод*: POST   
 *URL*: /init_game
 
-Создание игры с пустыми полями
-
-Получение Game_ID
+Создание игры с пустыми полями и получение её ID    
+Ожидаемый ответ:
+```json
+"d125e254-41d1-409b-b970-43afd1cf5582"
+```
 
 ###  Получение игры
 *Метод*: GET    
 *URL*: /get_game?game_id=some_game_id
 
-Получение всех полей игры по её ID
+Получение всех полей игры по её ID  
+Ожидаемый ответ:
+```json
+[
+  {
+    "y": 0,
+    "x": 0,
+    "unit_id": null
+  },
+  {
+    "y": 1,
+    "x": 0,
+    "unit_id": null
+  },
+  .
+  .
+  .
+  {
+    "y": 4,
+    "x": 7,
+    "unit_id": null
+  }
+]
+```
 
 ###  Создание юнита
 *Метод*: POST   
 *URL*: /create_unit?card_id=some_card_id&game_id=some_game_id&y=some_coordinates&x=some_coordinates
 
-Создание в игре юнита по карточке персонажа (card_id) на указанных координатах
+Создание в игре юнита по карточке персонажа (card_id) на указанных координатах  
+Ожидаемый ответ:
+```json
+[
+  {
+    "y": 3,
+    "x": 7,
+    "unit_id": "0617c7f4-b79b-4381-a245-80a607d16562",
+    "card_id": "6e7a3251-3333-4e15-7777-0a3739b1be0e",
+    "game_id": "f7829347-370a-46db-b996-d0ed3cdc17d1",
+    "name": "some_name",
+    "damage": 33,
+    "speed": 250,
+    "health": 980
+  }
+]
+```
 
 ###  Получение юнита
 *Метод*: GET    
 *URL*: /get_unit?unit_id=some_unit_id
 
-Получение X, Y, Game_ID юнита по его Unit_ID
+Получение X, Y, Game_ID юнита по его Unit_ID    
+Ожидаемый ответ:
+```json
+[
+  {
+    "y": 3,
+    "x": 7,
+    "unit_id": "0617c7f4-b79b-4381-a245-80a607d16562",
+    "card_id": "6e7a3251-3333-4e15-7777-0a3739b1be0e",
+    "game_id": "f7829347-370a-46db-b996-d0ed3cdc17d1",
+    "name": "some_name",
+    "damage": 33,
+    "speed": 250,
+    "health": 980
+  }
+]
+```
 
 ###  Передвижение юнита
 *Метод*: POST   
 *URL*: /move_unit?unit_id=some_unit_id&direction=some_direction
 
-Передвижение юнита на одну клетку в указанном направлении (direction)
-
+Передвижение юнита на одну клетку в указанном направлении (direction)   
+Ожидаемый ответ:
+```json
+true
+```
 # Service Configuration
 
 Файл конфигурации называется configuration.json и должен находиться в одной директории с исполняемым файлом
