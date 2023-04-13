@@ -44,27 +44,27 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 	}
 
 	if len(unit) == 0 {
-		context.JSON(http.StatusNotFound, model.Err{Error: "No card with this ID: " + err.Error()})
+		context.JSON(http.StatusNotFound, model.Err{Error: "No card with this ID: " + cardID})
 	}
 
 	context.JSON(http.StatusOK, unit)
 }
 
 func (s *Server) GetUnitHandler(context *gin.Context) {
-	unitId, ok := context.GetQuery("unit_id")
-	if unitId == "" || !ok {
+	unitID, ok := context.GetQuery("unit_id")
+	if unitID == "" || !ok {
 		context.JSON(http.StatusBadRequest, model.Err{Error: "Unit ID is missing"})
 		return
 	}
 
-	unitField, err := s.Storage.GetUnitFromDB(unitId)
+	unitField, err := s.Storage.GetUnitFromDB(unitID)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
 	}
 
 	if len(unitField) == 0 {
-		context.JSON(http.StatusNotFound, model.Err{Error: "No unit with this ID: " + err.Error()})
+		context.JSON(http.StatusNotFound, model.Err{Error: "No unit with this ID: " + unitID})
 	}
 
 	context.JSON(http.StatusOK, unitField)
@@ -89,6 +89,7 @@ func (s *Server) MoveUnitHandler(context *gin.Context) {
 			context.JSON(http.StatusConflict, model.Err{Error: err.Error()})
 			return
 		}
+
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
 	}

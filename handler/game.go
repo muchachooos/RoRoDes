@@ -30,7 +30,7 @@ func (s *Server) GetGameHandler(context *gin.Context) {
 	}
 
 	if len(game) == 0 {
-		context.JSON(http.StatusNotFound, model.Err{Error: "No game with this ID: " + err.Error()})
+		context.JSON(http.StatusNotFound, model.Err{Error: "No game with this ID: " + gameID})
 	}
 
 	context.JSON(http.StatusOK, game)
