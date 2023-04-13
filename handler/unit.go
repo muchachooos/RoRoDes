@@ -45,6 +45,7 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 
 	if len(unit) == 0 {
 		context.JSON(http.StatusNotFound, model.Err{Error: "No card with this ID: " + cardID})
+		return
 	}
 
 	context.JSON(http.StatusOK, unit)
@@ -65,6 +66,7 @@ func (s *Server) GetUnitHandler(context *gin.Context) {
 
 	if len(unitField) == 0 {
 		context.JSON(http.StatusNotFound, model.Err{Error: "No unit with this ID: " + unitID})
+		return
 	}
 
 	context.JSON(http.StatusOK, unitField)
