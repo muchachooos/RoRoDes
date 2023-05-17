@@ -3,7 +3,7 @@ import {
   LOBBY_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
-} from "../../utils/consts"
+} from "../../utils/routesConsts"
 import GamePage from "../game/GamePage"
 import LobbyPage from "../lobby/LobbyPage"
 import LoginPage from "../login/LoginPage"

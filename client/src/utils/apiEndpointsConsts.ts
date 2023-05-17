@@ -1,0 +1,1 @@
+export const GET_AVAILABLE_USERS = 'getAvaliableUsers'

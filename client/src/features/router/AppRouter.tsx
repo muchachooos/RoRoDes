@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { publicRoutes, restrictedRoutes } from "./routes"
-import { LOBBY_ROUTE, LOGIN_ROUTE } from "../../utils/consts"
+import { LOBBY_ROUTE, LOGIN_ROUTE } from "../../utils/routesConsts"
 
 type Props = {}
 const AppRouter = (props: Props) => {
