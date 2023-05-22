@@ -1,8 +1,8 @@
 package storage
 
 import (
-	"GameAPI/model"
-	"GameAPI/utilities"
+	"RoRoDes/model"
+	"RoRoDes/utilities"
 	"github.com/google/uuid"
 )
 

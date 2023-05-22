@@ -1,6 +1,8 @@
 package utilities
 
-import "GameAPI/model"
+import (
+	"RoRoDes/model"
+)
 
 const (
 	Up    = "UP"

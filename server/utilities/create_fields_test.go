@@ -1,7 +1,7 @@
 package utilities
 
 import (
-	"GameAPI/model"
+	"RoRoDes/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

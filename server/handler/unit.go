@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"GameAPI/model"
-	"GameAPI/storage"
+	"RoRoDes/model"
+	"RoRoDes/storage"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

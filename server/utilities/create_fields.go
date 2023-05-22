@@ -1,6 +1,8 @@
 package utilities
 
-import "GameAPI/model"
+import (
+	"RoRoDes/model"
+)
 
 func CreateFields(gameId string) [40]model.Field {
 	var fields [40]model.Field

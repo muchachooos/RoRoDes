@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"GameAPI/model"
+	"RoRoDes/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

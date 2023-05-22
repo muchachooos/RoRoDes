@@ -28,8 +28,8 @@ CREATE TABLE unit
 
 CREATE TABLE field
 (
-    `y`       INT NOT NULL,
-    `x`       INT NOT NULL,
+    `y`       INT      NOT NULL,
+    `x`       INT      NOT NULL,
     `unit_id` CHAR(36),
     `game_id` CHAR(36) NOT NULL,
     CONSTRAINT PRIMARY KEY (`x`, `y`, `game_id`),
@@ -38,3 +38,20 @@ CREATE TABLE field
     CONSTRAINT `FK_unit_id` FOREIGN KEY (`unit_id`)
         REFERENCES `unit` (`unit_id`)
 );
+
+CREATE TABLE user
+(
+    `login` VARCHAR(25) PRIMARY KEY
+);
+
+CREATE TABLE deck
+(
+    `id`      CHAR(36) PRIMARY KEY,
+    `user_id` CHAR(36)
+);
+
+CREATE TABLE card_in_deck
+(
+    `deck_id` CHAR(36),
+    `card_id` CHAR(36)
+)

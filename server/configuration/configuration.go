@@ -1,7 +1,7 @@
 package configuration
 
 import (
-	"GameAPI/model"
+	"RoRoDes/model"
 	"encoding/json"
 	"os"
 )

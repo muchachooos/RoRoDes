@@ -1,6 +1,8 @@
 package handler
 
-import "GameAPI/storage"
+import (
+	"RoRoDes/storage"
+)
 
 type Server struct {
 	Storage *storage.Storage
