@@ -10,24 +10,33 @@ const avaliableUsers = [
 
 type Props = {}
 const LobbyPage = (props: Props) => {
-  const { data } = lobbyAPI.useGetAvaliableUsersQuery(
-    {},
-    { pollingInterval: 1000 },
-  )
+  // const { data } = lobbyAPI.useGetAvaliableUsersQuery(
+  //   {},
+  //   { pollingInterval: 1000 },
+  // )
+  const [createGame, { data: createGameId, isLoading: isGameCreating }] =
+    lobbyAPI.useCreateGameMutation()
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (createGameId) {
+      navigate(`${GAME_ROUTE}/${createGameId}`)
+    }
+  }, [createGameId])
 
   const handleSelectGame = (id: string) => {
     navigate(`${GAME_ROUTE}/${id}`)
   }
 
   const handleCreateGame = () => {
-    
+    createGame(undefined)
   }
 
   return (
     <div className="w-screen h-screen bg-slate-200 flex flex-col justify-center items-center p-5">
       <button
+        disabled={isGameCreating}
         className="bg-sky-200 p-2 text-sky-800 rounded-md mb-5 w-1/2 mx-auto"
         onClick={handleCreateGame}
       >
