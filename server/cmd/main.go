@@ -6,11 +6,11 @@ import (
 	"RoRoDes/model"
 	"RoRoDes/storage"
 	"fmt"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"net/http"
-	"strconv"
 )
 
 const configPath = "configuration.json"
@@ -40,14 +40,6 @@ func main() {
 	engine.POST("/create_unit", server.CreateUnitHandler)
 	engine.GET("/get_unit", server.GetUnitHandler)
 	engine.POST("/move_unit", server.MoveUnitHandler)
-
-	// Файловый сервер который возвращает html, css, js и другие файлы
-	engine.StaticFS("/game", http.Dir("../client"))
-
-	// Перенаправляем все запросы без относительного пути, пример: "www.here.com" -> "www.here.com/game"
-	engine.GET("", func(c *gin.Context) {
-		c.Redirect(http.StatusMovedPermanently, "game")
-	})
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {
