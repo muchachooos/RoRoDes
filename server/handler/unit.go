@@ -3,9 +3,10 @@ package handler
 import (
 	"RoRoDes/model"
 	"RoRoDes/storage"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (s *Server) CreateUnitHandler(context *gin.Context) {
@@ -37,7 +38,7 @@ func (s *Server) CreateUnitHandler(context *gin.Context) {
 
 	y, err := strconv.Atoi(yInString)
 
-	unit, err := s.Storage.CreateUnitInDB(cardID, gameID, x, y)
+	unit, err := s.Service.CreateUnit(cardID, gameID, x, y)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
@@ -58,7 +59,7 @@ func (s *Server) GetUnitHandler(context *gin.Context) {
 		return
 	}
 
-	unitField, err := s.Storage.GetUnitFromDB(unitID)
+	unitField, err := s.Service.GetUnit(unitID)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
@@ -85,7 +86,7 @@ func (s *Server) MoveUnitHandler(context *gin.Context) {
 		return
 	}
 
-	ok, err := s.Storage.MoveUnitInDB(uintId, dir)
+	ok, err := s.Service.MoveUnit(uintId, dir)
 	if err != nil {
 		if err == storage.ErrMoveUnit {
 			context.JSON(http.StatusConflict, model.Err{Error: err.Error()})

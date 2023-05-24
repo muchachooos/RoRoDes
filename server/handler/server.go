@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"RoRoDes/storage"
+	"RoRoDes/service"
 )
 
 type Server struct {
-	Storage *storage.Storage
+	Service *service.Service
 }
