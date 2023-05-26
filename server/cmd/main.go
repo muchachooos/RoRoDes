@@ -4,6 +4,7 @@ import (
 	"RoRoDes/configuration"
 	"RoRoDes/handler"
 	"RoRoDes/model"
+	"RoRoDes/service"
 	"RoRoDes/storage"
 	"fmt"
 	"strconv"
@@ -28,8 +29,10 @@ func main() {
 	}
 
 	server := handler.Server{
-		Storage: &storage.Storage{
-			DB: dataBase,
+		Service: &service.Service{
+			Storage: &storage.Storage{
+				DB: dataBase,
+			},
 		},
 	}
 

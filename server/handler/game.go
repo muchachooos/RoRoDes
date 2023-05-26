@@ -2,12 +2,13 @@ package handler
 
 import (
 	"RoRoDes/model"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (s *Server) InitGameHandler(context *gin.Context) {
-	gameID, err := s.Storage.InitGameInDB()
+	gameID, err := s.Service.InitGame()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
@@ -23,7 +24,7 @@ func (s *Server) GetGameHandler(context *gin.Context) {
 		return
 	}
 
-	game, err := s.Storage.GetGameFromDB(gameID)
+	game, err := s.Service.GetGame(gameID)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return
