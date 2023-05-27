@@ -14,7 +14,7 @@ func (s *Server) InitGameHandler(context *gin.Context) {
 		return
 	}
 
-	gameID, err := s.Service.InitGame()
+	gameID, err := s.Service.InitGame(user)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
 		return

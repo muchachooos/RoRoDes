@@ -8,10 +8,10 @@ import (
 
 const countOfFields = 40
 
-func (s *Storage) InitGameInDB() (string, error) {
+func (s *Storage) InitGameInDB(user string) (string, error) {
 	gameId := uuid.NewString()
 
-	_, err := s.DB.Exec("INSERT INTO game (`game_id`) VALUES (?)", gameId)
+	_, err := s.DB.Exec("INSERT INTO game (`game_id`, `first_user`) VALUES (?, ?)", gameId, user)
 	if err != nil {
 		return "", err
 	}
