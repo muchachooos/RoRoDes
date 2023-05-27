@@ -7,11 +7,10 @@ import (
 	"RoRoDes/service"
 	"RoRoDes/storage"
 	"fmt"
-	"strconv"
-
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
+	"strconv"
 )
 
 const configPath = "configuration.json"
@@ -43,6 +42,8 @@ func main() {
 	engine.POST("/create_unit", server.CreateUnitHandler)
 	engine.GET("/get_unit", server.GetUnitHandler)
 	engine.POST("/move_unit", server.MoveUnitHandler)
+	engine.GET("/get_card", server.GetCardHandler)
+	engine.GET("/get_deck", server.GetDeckHandler)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))
 	if err != nil {

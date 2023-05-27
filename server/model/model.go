@@ -26,6 +26,14 @@ type Card struct {
 	Picture []byte  `json:"picture" db:"picture"`
 }
 
+type CardResponse struct {
+	CardID string  `json:"card_id" db:"card_id"`
+	Name   *string `json:"name"   db:"name"`
+	Damage *int    `json:"damage" db:"damage"`
+	Speed  *int    `json:"speed"  db:"speed"`
+	Health *int    `json:"health" db:"health"`
+}
+
 type Unit struct {
 	UnitID string  `json:"unit_id" db:"unit_id"`
 	CardID string  `json:"card_id" db:"card_id"`

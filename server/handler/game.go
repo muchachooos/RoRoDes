@@ -8,6 +8,12 @@ import (
 )
 
 func (s *Server) InitGameHandler(context *gin.Context) {
+	user, ok := context.GetQuery("user")
+	if user == "" || !ok {
+		context.JSON(http.StatusBadRequest, model.Err{Error: "User is missing"})
+		return
+	}
+
 	gameID, err := s.Service.InitGame()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
