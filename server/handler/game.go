@@ -43,3 +43,18 @@ func (s *Server) GetGameHandler(context *gin.Context) {
 
 	context.JSON(http.StatusOK, game)
 }
+
+func (s *Server) GetAllGameIdHandler(context *gin.Context) {
+	allId, err := s.Service.GetGameId()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, model.Err{Error: "Database error: " + err.Error()})
+		return
+	}
+
+	if len(allId) == 0 {
+		context.JSON(http.StatusNotFound, model.Err{Error: "No game"})
+		return
+	}
+
+	context.JSON(http.StatusOK, allId)
+}

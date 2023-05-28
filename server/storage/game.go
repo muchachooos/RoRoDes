@@ -38,3 +38,14 @@ func (s *Storage) GetGameFromDB(gameID string) ([]model.FieldResponse, error) {
 
 	return game, nil
 }
+
+func (s *Storage) GetAllGameIdFromDB() ([]string, error) {
+	var allId []string
+
+	err := s.DB.Select(&allId, "SELECT `game_id` FROM game")
+	if err != nil {
+		return nil, err
+	}
+
+	return allId, nil
+}

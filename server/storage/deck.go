@@ -38,3 +38,19 @@ func (s *Storage) GetDeckFromDB(userLogin string) ([]model.CardResponse, error) 
 
 	return cardInDeck, nil
 }
+
+func (s *Storage) AddCardInDB(userLogin, cardId string) (bool, error) {
+	var deckID string
+
+	err := s.DB.Get(&deckID, "SELECT `id` FROM deck WHERE `user_login` = ?", userLogin)
+	if err != nil {
+		return false, err
+	}
+
+	_, err = s.DB.Exec("INSERT INTO card_in_deck (`deck_id`, `card_id`) VALUES (?, ?)", deckID, cardId)
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}

@@ -1,8 +1,11 @@
 ### Запрос на создание игры:
-POST http://45.9.41.90:80/init_game?user=
+POST http://45.9.41.90:80/init_game?user=Boba
+
+### Запрос на создание игры:
+GET http://45.9.41.90:80/get_all_game_id
 
 ### Запрос на получение игры:
-GET http://45.9.41.90:80/get_game?game_id=61d880fa-56a9-48f2-9d4d-ab890dec0ad3
+GET http://45.9.41.90:80/get_game?game_id=b12f2705-f2c2-4c80-b16d-838844f93e45
 
 ### Запрос на создание юнита:
 POST http://45.9.41.90:80/create_unit?card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e&game_id=f7829347-370a-46db-b996-d0ed3cdc17d1&y=3&x=7
@@ -16,7 +19,13 @@ POST http://45.9.41.90:80/move_unit?unit_id=3d3960b4-e36b-44f2-9b01-75a96150cb5a
 ### Запрос на получение карты:
 GET http://45.9.41.90:80/get_card?card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e
 
-### Получение всех карт в колоде пользователя:
+### Запрос на получение имён всех карт:
+GET http://45.9.41.90:80/get_all_name
+
+### Добавление карты в колоду пользователя:
+PUT http://45.9.41.90:80/add_card_in_deck?login=Boba&card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e
+
+### Получение колоды пользователя:
 GET http://45.9.41.90:80/get_deck?login=Boba
 
 

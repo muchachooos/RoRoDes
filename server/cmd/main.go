@@ -38,11 +38,14 @@ func main() {
 	engine := gin.Default()
 
 	engine.POST("/init_game", server.InitGameHandler)
+	engine.GET("/get_all_game_id", server.GetAllGameIdHandler)
 	engine.GET("/get_game", server.GetGameHandler)
 	engine.POST("/create_unit", server.CreateUnitHandler)
 	engine.GET("/get_unit", server.GetUnitHandler)
 	engine.POST("/move_unit", server.MoveUnitHandler)
 	engine.GET("/get_card", server.GetCardHandler)
+	engine.GET("/get_all_name", server.GetNameAllCardsHandler)
+	engine.PUT("/add_card_in_deck", server.AddCardInDeckHandler)
 	engine.GET("/get_deck", server.GetDeckHandler)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))

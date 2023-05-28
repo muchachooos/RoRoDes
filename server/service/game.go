@@ -9,3 +9,7 @@ func (s *Service) InitGame(user string) (string, error) {
 func (s *Service) GetGame(id string) ([]model.FieldResponse, error) {
 	return s.Storage.GetGameFromDB(id)
 }
+
+func (s *Service) GetGameId() ([]string, error) {
+	return s.Storage.GetAllGameIdFromDB()
+}
