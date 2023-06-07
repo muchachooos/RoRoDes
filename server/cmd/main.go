@@ -46,6 +46,7 @@ func main() {
 	engine.GET("/get_card", server.GetCardHandler)
 	engine.GET("/get_all_name", server.GetNameAllCardsHandler)
 	engine.PUT("/add_card_in_deck", server.AddCardInDeckHandler)
+	engine.DELETE("/delete_from_deck", server.DeleteCardFromDeckHandler)
 	engine.GET("/get_deck", server.GetDeckHandler)
 
 	err = engine.Run(":" + strconv.Itoa(config.Port))

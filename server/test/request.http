@@ -23,7 +23,10 @@ GET http://45.9.41.90:80/get_card?card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e
 GET http://45.9.41.90:80/get_all_name
 
 ### Добавление карты в колоду пользователя:
-PUT http://45.9.41.90:80/add_card_in_deck?login=Boba&card_id=6e7a3251-3333-4e15-7777-0a3739b1be0e
+PUT http://45.9.41.90:80/add_card_in_deck?login=Boba&card_id=78563412-card-3333-1511-71h31897hf71
+
+### Удаление карты из колоды пользователя:
+DELETE http://45.9.41.90:80/delete_from_deck?login=Boba&card_id=21436587-card-2222-1511-71h31897hf71
 
 ### Получение колоды пользователя:
 GET http://45.9.41.90:80/get_deck?login=Boba

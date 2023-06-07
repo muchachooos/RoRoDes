@@ -9,3 +9,7 @@ func (s *Service) GetDeck(userLogin string) ([]model.CardResponse, error) {
 func (s *Service) AddCard(userLogin, cardId string) (bool, error) {
 	return s.Storage.AddCardInDB(userLogin, cardId)
 }
+
+func (s *Service) DeleteCard(userLogin, cardId string) (bool, error) {
+	return s.Storage.DeleteCardInDB(userLogin, cardId)
+}
