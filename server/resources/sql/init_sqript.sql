@@ -58,14 +58,3 @@ CREATE TABLE card_in_deck
     `deck_id` CHAR(36),
     `card_id` CHAR(36)
 );
-
-INSERT INTO deck
-VALUES ('6e7a3251-3333-4e15-7777-0a3739b11111',
-        'Boba');
-
-INSERT INTO card_in_deck
-VALUES ('6e7a3251-3333-4e15-7777-0a3739b11111',
-        '6e7a3251-0404-4e15-7777-0a3739b11111');
-
-
-
