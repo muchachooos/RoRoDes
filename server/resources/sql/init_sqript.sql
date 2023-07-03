@@ -1,18 +1,8 @@
 CREATE TABLE game
 (
-    `game_id` CHAR(36) PRIMARY KEY,
-    `first_user` VARCHAR(33) NOT NULL,
+    `game_id`     CHAR(36) PRIMARY KEY,
+    `first_user`  VARCHAR(33) NOT NULL,
     `second_user` VARCHAR(33)
-);
-
-CREATE TABLE card
-(
-    `card_id` CHAR(36) PRIMARY KEY,
-    `name`    VARCHAR(26),
-    `damage`  INT,
-    `speed`   INT,
-    `health`  INT NOT NULL,
-    `picture` MEDIUMBLOB
 );
 
 CREATE TABLE unit
@@ -46,6 +36,16 @@ CREATE TABLE user
     `login` VARCHAR(25) PRIMARY KEY
 );
 
+CREATE TABLE card
+(
+    `card_id` CHAR(36) PRIMARY KEY,
+    `name`    VARCHAR(26),
+    `damage`  INT,
+    `speed`   INT,
+    `health`  INT NOT NULL,
+    `picture` MEDIUMBLOB
+);
+
 CREATE TABLE deck
 (
     `id`         CHAR(36),
@@ -56,5 +56,7 @@ CREATE TABLE deck
 CREATE TABLE card_in_deck
 (
     `deck_id` CHAR(36),
-    `card_id` CHAR(36)
+    `card_id` CHAR(36),
+    `count`   INT,
+    CONSTRAINT PRIMARY KEY `PK_card_in_deck` (`deck_id`, `card_id`)
 );

@@ -1,9 +1,5 @@
 package model
 
-type Err struct {
-	Error string `json:"error"`
-}
-
 type Config struct {
 	Port   int    `json:"port"`
 	DBConf DBConf `json:"DataBase"`
@@ -32,6 +28,12 @@ type CardResponse struct {
 	Damage *int    `json:"damage" db:"damage"`
 	Speed  *int    `json:"speed"  db:"speed"`
 	Health *int    `json:"health" db:"health"`
+}
+
+type CardInDeck struct {
+	DeckID string `json:"deck_id" db:"deck_id"`
+	CardID string `json:"card_id" db:"card_id"`
+	Count  int    `json:"count" db:"count"`
 }
 
 type Unit struct {
