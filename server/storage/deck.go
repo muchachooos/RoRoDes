@@ -42,6 +42,45 @@ func (s *Storage) AddCardInDB(userLogin, cardID string) error {
 	return nil
 }
 
+func (s *Storage) DeleteCardFromDB(userLogin, cardID string) error {
+	var deckID string
+
+	// Получаем ID колоды пользователя
+	err := s.DB.Get(&deckID, "SELECT `id` FROM deck WHERE `user_login` = ?", userLogin)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return model.ErrDeckNotFound
+		}
+		return err
+	}
+
+	var cardInDeck model.CardInDeck
+
+	// Проверяем на наличие такой карты в колоде пользователя
+	err = s.DB.Get(&cardInDeck, "SELECT * FROM card_in_deck WHERE `deck_id` = ? AND `card_id` = ?", deckID, cardID)
+	if err != nil {
+		// Если карты с таким ID нет, возвращаем ошибку
+		if errors.Is(err, sql.ErrNoRows) {
+			return model.ErrCardNotFound
+		}
+		return err
+	}
+
+	// Если такая карта одна, то удаляем ее
+	if cardInDeck.Count == 1 {
+		_, err = s.DB.Exec("DELETE FROM card_in_deck WHERE `deck_id` = ? AND `card_id` = ?", deckID, cardID)
+		return err
+	}
+
+	// Если такая карта не одна, то уменьшаем её кол-во на 1
+	_, err = s.DB.Exec("UPDATE card_in_deck SET `count` = `count` - 1 WHERE `deck_id` = ? AND `card_id` = ?", deckID, cardID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (s *Storage) GetDeckFromDB(userLogin string) ([]model.CardResponse, error) {
 	var deckID string
 
@@ -70,29 +109,4 @@ func (s *Storage) GetDeckFromDB(userLogin string) ([]model.CardResponse, error) 
 	}
 
 	return cardInDeck, nil
-}
-
-func (s *Storage) DeleteCardInDB(userLogin, cardID string) (bool, error) {
-	var deckID string
-
-	err := s.DB.Get(&deckID, "SELECT `id` FROM deck WHERE `user_login` = ?", userLogin)
-	if err != nil {
-		return false, err
-	}
-
-	res, err := s.DB.Exec("DELETE FROM card_in_deck WHERE `deck_id` = ? AND `card_id` = ? LIMIT 1", deckID, cardID)
-	if err != nil {
-		return false, err
-	}
-
-	countOfDeletedRows, err := res.RowsAffected()
-	if err != nil {
-		return false, err
-	}
-
-	if countOfDeletedRows == 0 {
-		return false, nil
-	}
-
-	return true, nil
 }
